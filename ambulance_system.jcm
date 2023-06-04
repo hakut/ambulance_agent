@@ -1,0 +1,35 @@
+/*
+    ambulance_system
+    ---------------------------
+
+    JaCaMo Application File
+
+    This file defines the initial state of the MAS (initial agents, environment, organisation, ....)
+
+    (see jacamo/doc/jcm.html for more information about what can be defined in this file)
+
+    JaCaMo 1.0
+    June 04, 2023 - 20:03:14
+*/
+
+mas ambulance_system {
+
+    agent ambulance1 : ambulance.asl {
+    	beliefs: available, coord("13","40")
+    }
+    agent ambulance2 : ambulance.asl {
+    	beliefs: available, coord("50","40")
+    }
+    agent ambulance3 : ambulance.asl {
+    	beliefs: available, coord("15","35")
+    }
+	agent controller : controller.asl{
+		beliefs: event_occured, coord("12","34"), closest_amb("null")
+		goals: find_available_ambulance(coord)
+		focus:  cont.func
+	}
+    workspace cont {
+    	artifact func: tools.controllerJava(3)
+    }
+}
+
